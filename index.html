@@ -1,0 +1,1372 @@
+=<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEOM Group | Industrial Energy-Optimization Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   RESET & ROOT
+============================================================ */
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+
+:root{
+  --lime:#7CB518;
+  --lime-dim:#5A8A0E;
+  --lime-dark:#3D6009;
+  --midnight:#050F05;
+  --midnight-mid:#091509;
+  --alert:#FF6B00;
+  --alert-dark:#CC5000;
+  --white:#FFFFFF;
+  --off-white:#F2F7EE;
+  --text-dark:#061206;
+  --text-muted:#506050;
+  --card-bg:rgba(124,181,24,0.04);
+  --card-border:rgba(124,181,24,0.18);
+}
+
+html{font-family:'Source Sans 3',sans-serif;}
+
+/* ============================================================
+   SCROLLBAR
+============================================================ */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:#050F05;}
+::-webkit-scrollbar-thumb{background:#7CB518;border-radius:3px;}
+
+/* ============================================================
+   NAVBAR
+============================================================ */
+.navbar{
+  width:100%;
+  background:rgba(5,15,5,0.97);
+  padding:14px 8%;
+  position:fixed;
+  top:0;left:0;
+  z-index:1000;
+  border-bottom:1px solid rgba(124,181,24,0.18);
+  backdrop-filter:blur(12px);
+}
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-family:'Rajdhani',sans-serif;
+  font-size:22px;
+  font-weight:700;
+  color:var(--lime);
+  letter-spacing:2px;
+}
+.logo span{color:var(--white);font-weight:400;}
+#navMenu{display:flex;gap:32px;align-items:center;}
+#navMenu a{
+  text-decoration:none;
+  color:rgba(124,181,24,0.8);
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  position:relative;
+  transition:color 0.3s;
+  font-family:'IBM Plex Mono',monospace;
+}
+#navMenu a::after{
+  content:"";position:absolute;left:0;bottom:-4px;
+  width:0;height:1px;background:var(--lime);transition:0.3s;
+}
+#navMenu a:hover{color:var(--lime);}
+#navMenu a:hover::after{width:100%;}
+.menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.menu-toggle span{width:24px;height:2px;background:var(--lime);display:block;transition:0.3s;}
+
+@media(max-width:900px){
+  #navMenu{
+    position:absolute;top:64px;left:0;width:100%;
+    background:rgba(5,15,5,0.98);
+    flex-direction:column;padding:28px 0;gap:20px;display:none;
+    border-bottom:1px solid rgba(124,181,24,0.18);
+  }
+  #navMenu.active{display:flex;}
+  .menu-toggle{display:flex;}
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+.hero-section{
+  position:relative;
+  padding:150px 8% 100px;
+  background:var(--midnight);
+  overflow:hidden;
+  min-height:100vh;
+  display:flex;align-items:center;
+}
+.hero-section::before{
+  content:"";position:absolute;top:0;right:0;
+  width:280px;height:280px;
+  background:var(--lime);opacity:0.07;
+  clip-path:polygon(100% 0,0 0,100% 100%);
+}
+.hero-section::after{
+  content:"";position:absolute;bottom:0;left:0;
+  width:300px;height:300px;
+  background:var(--alert);opacity:0.06;
+  clip-path:polygon(0 100%,0 0,100% 100%);
+}
+.hero-glow{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(124,181,24,0.05) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(124,181,24,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,181,24,0.04) 1px, transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+}
+.hero-container{
+  max-width:1200px;margin:auto;
+  display:grid;grid-template-columns:1.1fr 0.9fr;
+  gap:70px;align-items:center;
+  position:relative;z-index:2;width:100%;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(124,181,24,0.08);
+  border:1px solid rgba(124,181,24,0.3);
+  color:var(--lime);
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  padding:6px 16px;border-radius:3px;
+  text-transform:uppercase;margin-bottom:20px;
+  font-family:'IBM Plex Mono',monospace;
+}
+.hero-badge::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--lime);
+  animation:pulse-dot 1.5s ease-in-out infinite;
+}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.6);}}
+.hero-left h1{
+  font-family:'Rajdhani',sans-serif;
+  font-size:54px;line-height:1.12;
+  color:var(--lime);
+  margin-bottom:8px;
+  letter-spacing:1px;
+}
+.hero-left h1 span{color:var(--white);}
+.hero-divider{
+  width:70px;height:2px;
+  background:linear-gradient(90deg,var(--lime),transparent);
+  margin:18px 0 24px;
+}
+.hero-text{
+  color:#8AAB8A;font-size:17px;line-height:1.85;
+  margin-bottom:35px;max-width:520px;
+}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
+.btn-lime{
+  background:linear-gradient(135deg,var(--lime),var(--lime-dark));
+  color:var(--midnight);
+  padding:14px 32px;border-radius:4px;
+  text-decoration:none;font-weight:700;
+  font-size:13px;letter-spacing:1px;text-transform:uppercase;
+  transition:0.3s;box-shadow:0 4px 20px rgba(124,181,24,0.25);
+  font-family:'IBM Plex Mono',monospace;
+}
+.btn-lime:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,181,24,0.4);}
+.btn-outline-lime{
+  border:1px solid var(--lime);
+  color:var(--lime);
+  padding:14px 32px;border-radius:4px;
+  text-decoration:none;font-weight:700;
+  font-size:13px;letter-spacing:1px;text-transform:uppercase;
+  transition:0.3s;font-family:'IBM Plex Mono',monospace;
+}
+.btn-outline-lime:hover{background:rgba(124,181,24,0.08);}
+.hero-right{position:relative;}
+.hero-card{
+  background:rgba(124,181,24,0.04);
+  border:1px solid rgba(124,181,24,0.18);
+  border-radius:12px;
+  padding:35px;
+  backdrop-filter:blur(8px);
+  position:relative;overflow:hidden;
+}
+.hero-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;
+  height:2px;background:linear-gradient(90deg,var(--lime),var(--alert));
+}
+.hero-card-title{
+  font-family:'IBM Plex Mono',monospace;
+  color:var(--lime);font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;margin-bottom:20px;
+}
+.hero-stat{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 0;border-bottom:1px solid rgba(124,181,24,0.08);
+}
+.hero-stat:last-child{border-bottom:none;}
+.stat-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--lime);flex-shrink:0;
+}
+.stat-dot.orange{background:var(--alert);}
+.stat-label{color:#8AAB8A;font-size:14px;flex:1;}
+.stat-val{color:var(--lime);font-weight:700;font-size:16px;font-family:'Rajdhani',sans-serif;letter-spacing:1px;}
+
+/* Hero image */
+.hero-img-wrap{
+  width:100%;border-radius:10px;overflow:hidden;
+  border:1px solid rgba(124,181,24,0.18);
+  margin-bottom:20px;
+  position:relative;
+}
+.hero-img-wrap img{width:100%;display:block;opacity:0.85;filter:saturate(0.8);}
+.hero-img-wrap::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(5,15,5,0.8) 100%);
+}
+
+@media(max-width:900px){
+  .hero-section{padding:120px 6% 80px;min-height:auto;}
+  .hero-container{grid-template-columns:1fr;gap:50px;text-align:center;}
+  .hero-left h1{font-size:32px;}
+  .hero-divider{margin:16px auto 22px;}
+  .hero-text{font-size:15px;margin:0 auto 28px;max-width:95%;}
+  .hero-buttons{justify-content:center;}
+  .btn-lime,.btn-outline-lime{padding:13px 24px;font-size:12px;}
+}
+
+/* ============================================================
+   ABOUT
+============================================================ */
+.about-section{
+  padding:130px 8%;
+  background:var(--midnight-mid);
+  position:relative;overflow:hidden;
+}
+.about-section::before{
+  content:"";position:absolute;top:0;right:0;
+  width:250px;height:250px;
+  background:var(--alert);opacity:0.05;
+  clip-path:polygon(100% 0,0 0,100% 100%);
+}
+.about-section::after{
+  content:"";position:absolute;bottom:0;left:0;
+  width:250px;height:250px;
+  background:var(--lime);opacity:0.04;
+  clip-path:polygon(0 100%,0 0,100% 100%);
+}
+.about-container{
+  max-width:1100px;margin:auto;
+  display:grid;grid-template-columns:1.3fr 1fr;
+  gap:80px;align-items:center;
+  position:relative;z-index:2;
+}
+.section-label{
+  display:inline-block;
+  color:var(--lime);font-size:11px;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:14px;font-family:'IBM Plex Mono',monospace;
+}
+.section-title{
+  font-family:'Rajdhani',sans-serif;
+  font-size:40px;color:var(--lime);
+  line-height:1.2;margin-bottom:8px;
+  letter-spacing:1px;
+}
+.section-divider{
+  width:70px;height:2px;
+  background:linear-gradient(90deg,var(--lime),transparent);
+  margin:14px 0 26px;
+}
+.about-left p{
+  color:#8AAB8A;line-height:1.85;
+  margin-bottom:20px;font-size:16px;max-width:520px;
+}
+.about-features{
+  margin-top:28px;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
+}
+.feature-tag{
+  background:rgba(124,181,24,0.06);
+  border:1px solid rgba(124,181,24,0.18);
+  color:rgba(124,181,24,0.9);
+  padding:10px 16px;border-radius:5px;
+  font-size:12px;font-weight:700;
+  letter-spacing:0.5px;font-family:'IBM Plex Mono',monospace;
+}
+.founder-box{
+  background:rgba(124,181,24,0.04);
+  border:1px solid rgba(124,181,24,0.18);
+  padding:38px;border-radius:12px;
+  position:relative;
+}
+.founder-box::before{
+  content:'"';
+  position:absolute;top:-20px;left:28px;
+  font-size:80px;color:var(--lime);opacity:0.12;
+  font-family:'Rajdhani',sans-serif;line-height:1;
+}
+.founder-box::after{
+  content:"";position:absolute;top:0;left:0;right:0;
+  height:2px;background:linear-gradient(90deg,var(--lime),transparent);
+  border-radius:12px 12px 0 0;
+}
+.founder-box-title{
+  font-family:'Rajdhani',sans-serif;
+  color:var(--lime);font-size:13px;
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;
+}
+.founder-box-div{width:50px;height:2px;background:var(--lime);margin-bottom:18px;}
+.founder-box p{color:#8AAB8A;line-height:1.8;margin-bottom:16px;font-size:15px;}
+.founder-box p strong{color:rgba(124,181,24,0.9);}
+.linkedin-btn{
+  display:inline-block;padding:10px 22px;
+  background:var(--lime);color:var(--midnight);
+  text-decoration:none;border-radius:4px;
+  font-weight:700;font-size:12px;letter-spacing:1px;
+  text-transform:uppercase;margin-top:4px;transition:0.3s;
+  font-family:'IBM Plex Mono',monospace;
+}
+.linkedin-btn:hover{background:#99CC33;}
+
+@media(max-width:900px){
+  .about-section{padding:90px 6%;}
+  .about-container{grid-template-columns:1fr;gap:50px;text-align:center;}
+  .section-divider{margin:14px auto 24px;}
+  .about-left p{margin:0 auto 18px;max-width:95%;}
+  .about-features{grid-template-columns:1fr;max-width:300px;margin:20px auto 0;}
+  .feature-tag{text-align:center;}
+  .founder-box{text-align:center;}
+  .founder-box-div{margin:8px auto 18px;}
+}
+
+/* ============================================================
+   PROCESS — How It Works
+============================================================ */
+.process-section{
+  padding:130px 8%;
+  background:var(--off-white);
+  position:relative;overflow:hidden;
+}
+.process-section::before{
+  content:"";position:absolute;top:0;right:0;
+  width:250px;height:250px;
+  background:var(--lime);opacity:0.07;
+  clip-path:polygon(100% 0,0 0,100% 100%);
+}
+.process-section::after{
+  content:"";position:absolute;bottom:0;left:0;
+  width:260px;height:260px;
+  background:var(--midnight);opacity:0.07;
+  clip-path:polygon(0 100%,0 0,100% 100%);
+}
+.process-container{
+  max-width:1200px;margin:auto;
+  text-align:center;position:relative;z-index:2;
+}
+.process-container .section-title{color:var(--text-dark);}
+.process-container .section-label{color:var(--alert);}
+.process-container .section-divider{margin:14px auto 26px;background:linear-gradient(90deg,var(--lime-dim),transparent);}
+.process-sub{
+  max-width:660px;margin:0 auto 60px;
+  color:#556050;line-height:1.8;font-size:16px;
+}
+.process-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:28px;
+}
+.process-card{
+  background:var(--white);
+  padding:28px 22px;
+  border-radius:10px;
+  border:1px solid #d8e4d0;
+  border-top:4px solid var(--lime);
+  text-align:left;
+  transition:0.35s;
+  box-shadow:0 4px 20px rgba(0,0,0,0.04);
+}
+.process-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 40px rgba(124,181,24,0.12);
+  border-top-color:var(--alert);
+}
+.process-card-img{
+  width:100%;height:140px;object-fit:cover;
+  background:var(--midnight);border-radius:7px;
+  margin-bottom:16px;padding:0;display:block;
+}
+.step-badge{
+  display:inline-block;
+  background:var(--lime);color:var(--midnight);
+  font-size:11px;font-weight:700;
+  padding:5px 14px;border-radius:3px;
+  letter-spacing:1px;margin-bottom:12px;
+  font-family:'IBM Plex Mono',monospace;
+}
+.process-card h3{
+  font-family:'Rajdhani',sans-serif;
+  margin-bottom:10px;color:var(--text-dark);font-size:18px;letter-spacing:0.5px;
+}
+.process-card p{color:#556050;font-size:14px;line-height:1.65;}
+
+@media(max-width:1000px){.process-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){
+  .process-section{padding:80px 6%;}
+  .process-container .section-title{font-size:26px;}
+  .process-sub{font-size:14px;margin-bottom:40px;}
+  .process-grid{grid-template-columns:1fr;}
+}
+
+/* ============================================================
+   PLATFORM — Core Elements
+============================================================ */
+.platform-section{
+  padding:130px 8%;
+  background:var(--midnight);
+  position:relative;overflow:hidden;
+}
+.platform-section::before{
+  content:"";position:absolute;top:0;right:0;
+  width:250px;height:250px;
+  background:var(--lime);opacity:0.06;
+  clip-path:polygon(100% 0,0 0,100% 100%);
+}
+.platform-section::after{
+  content:"";position:absolute;bottom:0;left:0;
+  width:260px;height:260px;
+  background:var(--alert);opacity:0.05;
+  clip-path:polygon(0 100%,0 0,100% 100%);
+}
+.platform-container{
+  max-width:1100px;margin:auto;
+  position:relative;z-index:2;
+}
+.platform-header{text-align:center;margin-bottom:60px;}
+.platform-header .section-title{color:var(--lime);}
+.platform-header .section-label{color:var(--alert);}
+.platform-header .section-divider{margin:14px auto 22px;}
+.platform-header p{color:#8AAB8A;max-width:620px;margin:0 auto;line-height:1.8;font-size:16px;}
+.platform-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+}
+.platform-card{
+  background:rgba(124,181,24,0.04);
+  border:1px solid rgba(124,181,24,0.14);
+  border-radius:10px;padding:30px;
+  transition:0.35s;position:relative;overflow:hidden;
+}
+.platform-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;
+  height:2px;background:linear-gradient(90deg,var(--lime),transparent);
+}
+.platform-card:hover{
+  border-color:rgba(124,181,24,0.35);
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px rgba(124,181,24,0.1);
+}
+.platform-card-img{
+  width:100%;height:130px;object-fit:cover;
+  border-radius:7px;margin-bottom:18px;
+  display:block;
+  border:1px solid rgba(124,181,24,0.1);
+}
+.platform-letter{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;
+  background:rgba(124,181,24,0.12);
+  border:1px solid rgba(124,181,24,0.25);
+  border-radius:6px;
+  font-family:'IBM Plex Mono',monospace;
+  color:var(--lime);font-size:18px;font-weight:700;
+  margin-bottom:16px;
+}
+.platform-card h3{
+  font-family:'Rajdhani',sans-serif;
+  color:var(--lime);font-size:20px;margin-bottom:10px;letter-spacing:0.5px;
+}
+.platform-card p{color:#8AAB8A;font-size:14px;line-height:1.7;margin-bottom:16px;}
+.platform-expand{display:none;color:#8AAB8A;font-size:14px;line-height:1.7;margin-top:10px;}
+.platform-expand.open{display:block;}
+.platform-btn{
+  background:transparent;
+  border:1px solid rgba(124,181,24,0.3);
+  color:var(--lime);
+  font-size:12px;letter-spacing:1px;
+  padding:8px 18px;border-radius:4px;
+  cursor:pointer;transition:0.3s;
+  font-family:'IBM Plex Mono',monospace;font-weight:700;
+}
+.platform-btn:hover{background:rgba(124,181,24,0.08);}
+
+@media(max-width:900px){.platform-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){
+  .platform-section{padding:80px 6%;}
+  .platform-grid{grid-template-columns:1fr;}
+  .platform-header .section-title{font-size:26px;}
+}
+
+/* ============================================================
+   PRICING
+============================================================ */
+.pricing-section{
+  padding:130px 8%;
+  background:var(--off-white);
+  position:relative;overflow:hidden;
+}
+.pricing-section::before{
+  content:"";position:absolute;top:0;right:0;
+  width:240px;height:240px;
+  background:var(--lime);opacity:0.06;
+  clip-path:polygon(100% 0,0 0,100% 100%);
+}
+.pricing-section::after{
+  content:"";position:absolute;bottom:0;left:0;
+  width:250px;height:250px;
+  background:var(--midnight);opacity:0.05;
+  clip-path:polygon(0 100%,0 0,100% 100%);
+}
+.pricing-container{
+  max-width:1100px;margin:auto;
+  text-align:center;position:relative;z-index:2;
+}
+.pricing-container .section-title{color:var(--text-dark);}
+.pricing-container .section-label{color:var(--alert);}
+.pricing-container .section-divider{margin:14px auto 26px;background:linear-gradient(90deg,var(--lime-dim),transparent);}
+.pricing-sub{
+  max-width:580px;margin:0 auto 55px;
+  color:#556050;line-height:1.8;font-size:16px;
+}
+.pricing-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+}
+.price-card{
+  background:var(--white);
+  border:1px solid #d8e4d0;
+  padding:38px 30px;
+  border-radius:10px;text-align:left;
+  transition:0.35s;position:relative;
+  box-shadow:0 4px 20px rgba(0,0,0,0.04);
+}
+.price-card.featured{
+  background:var(--midnight);
+  border-color:var(--lime);
+  border-top:4px solid var(--lime);
+  box-shadow:0 10px 40px rgba(124,181,24,0.18);
+  transform:scale(1.04);
+}
+.price-card:not(.featured){border-top:4px solid #c8d8c0;}
+.price-card:hover:not(.featured){
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px rgba(0,0,0,0.08);
+}
+.price-tag{
+  display:inline-block;background:rgba(124,181,24,0.08);
+  border:1px solid rgba(124,181,24,0.22);
+  color:var(--lime);font-size:11px;font-weight:700;
+  letter-spacing:2px;padding:5px 12px;border-radius:3px;
+  text-transform:uppercase;margin-bottom:16px;
+  font-family:'IBM Plex Mono',monospace;
+}
+.price-card.featured .price-tag{background:rgba(124,181,24,0.15);}
+.price-card h3{
+  font-family:'Rajdhani',sans-serif;
+  font-size:24px;margin-bottom:6px;color:var(--text-dark);letter-spacing:0.5px;
+}
+.price-card.featured h3{color:var(--lime);}
+.price-amount{
+  font-family:'Rajdhani',sans-serif;
+  font-size:34px;font-weight:700;
+  color:var(--lime-dim);margin:16px 0 6px;display:block;
+}
+.price-card.featured .price-amount{color:var(--lime);}
+.price-unit{color:#888;font-size:13px;margin-bottom:22px;}
+.price-card.featured .price-unit{color:#8AAB8A;}
+.price-features{list-style:none;margin-bottom:28px;}
+.price-features li{
+  padding:9px 0;border-bottom:1px solid rgba(0,0,0,0.06);
+  color:#556050;font-size:14px;display:flex;gap:10px;align-items:flex-start;
+}
+.price-card.featured .price-features li{
+  border-bottom-color:rgba(255,255,255,0.07);color:#8AAB8A;
+}
+.price-features li:last-child{border-bottom:none;}
+.check{color:var(--lime);font-weight:700;flex-shrink:0;}
+.price-btn{
+  display:block;text-align:center;
+  padding:13px;border-radius:5px;
+  text-decoration:none;font-weight:700;font-size:13px;
+  letter-spacing:1px;text-transform:uppercase;transition:0.3s;
+  font-family:'IBM Plex Mono',monospace;
+}
+.price-btn-outline{border:1px solid var(--midnight);color:var(--midnight);}
+.price-btn-outline:hover{background:var(--midnight);color:var(--white);}
+.price-btn-lime{
+  background:linear-gradient(135deg,var(--lime),var(--lime-dark));
+  color:var(--midnight);
+}
+.price-btn-lime:hover{filter:brightness(1.1);}
+
+@media(max-width:900px){
+  .pricing-grid{grid-template-columns:1fr;}
+  .price-card.featured{transform:scale(1);}
+}
+@media(max-width:600px){
+  .pricing-section{padding:80px 6%;}
+  .pricing-container .section-title{font-size:26px;}
+}
+
+/* ============================================================
+   FAQ
+============================================================ */
+.faq-section{
+  padding:130px 8%;
+  background:var(--midnight);
+  position:relative;overflow:hidden;
+}
+.faq-section::before{
+  content:"";position:absolute;top:0;right:0;
+  width:240px;height:240px;
+  background:var(--lime);opacity:0.06;
+  clip-path:polygon(100% 0,0 0,100% 100%);
+}
+.faq-section::after{
+  content:"";position:absolute;bottom:0;left:0;
+  width:250px;height:250px;
+  background:var(--alert);opacity:0.05;
+  clip-path:polygon(0 100%,0 0,100% 100%);
+}
+.faq-container{
+  max-width:800px;margin:auto;
+  position:relative;z-index:2;
+}
+.faq-header{text-align:center;margin-bottom:50px;}
+.faq-header .section-title{color:var(--lime);}
+.faq-header .section-label{color:var(--alert);}
+.faq-header .section-divider{margin:14px auto 20px;}
+.faq-item{
+  border-bottom:1px solid rgba(124,181,24,0.12);
+  padding:20px 0;
+}
+.faq-question{
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;gap:20px;
+}
+.faq-question h4{
+  font-family:'Rajdhani',sans-serif;
+  color:rgba(124,181,24,0.9);font-size:17px;font-weight:600;letter-spacing:0.3px;
+}
+.faq-icon{
+  color:var(--lime);font-size:20px;font-weight:300;
+  flex-shrink:0;transition:0.3s;font-family:'IBM Plex Mono',monospace;
+}
+.faq-answer{
+  display:none;
+  color:#607060;font-size:15px;line-height:1.75;
+  padding-top:14px;
+}
+.faq-item.open .faq-answer{display:block;}
+.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--alert);}
+
+@media(max-width:600px){
+  .faq-section{padding:80px 6%;}
+  .faq-question h4{font-size:15px;}
+}
+
+/* ============================================================
+   CONTACT
+============================================================ */
+.contact-section{
+  padding:130px 8%;
+  background:var(--midnight-mid);
+  position:relative;overflow:hidden;
+}
+.contact-section::before{
+  content:"";position:absolute;top:0;right:0;
+  width:240px;height:240px;
+  background:var(--lime);opacity:0.06;
+  clip-path:polygon(100% 0,0 0,100% 100%);
+}
+.contact-section::after{
+  content:"";position:absolute;bottom:0;left:0;
+  width:250px;height:250px;
+  background:var(--alert);opacity:0.06;
+  clip-path:polygon(0 100%,0 0,100% 100%);
+}
+.contact-container{
+  max-width:1050px;margin:auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:70px;align-items:start;
+  position:relative;z-index:2;
+}
+.contact-left .section-title{color:var(--lime);}
+.contact-left .section-label{color:var(--alert);}
+.contact-left .section-divider{background:linear-gradient(90deg,var(--lime),transparent);}
+.contact-left p{color:#8AAB8A;line-height:1.8;font-size:16px;margin-bottom:30px;}
+.contact-info-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px;}
+.contact-icon{
+  width:38px;height:38px;
+  background:rgba(124,181,24,0.08);
+  border:1px solid rgba(124,181,24,0.18);
+  border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--lime);font-size:16px;flex-shrink:0;
+}
+.contact-info-text strong{color:rgba(124,181,24,0.9);font-size:13px;display:block;margin-bottom:3px;}
+.contact-info-text span{color:#607060;font-size:14px;}
+.contact-form{display:flex;flex-direction:column;gap:16px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group label{color:var(--lime);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;}
+.form-group input,
+.form-group select,
+.form-group textarea{
+  background:rgba(124,181,24,0.04);
+  border:1px solid rgba(124,181,24,0.18);
+  color:var(--white);padding:12px 16px;
+  border-radius:5px;font-size:14px;
+  font-family:'Source Sans 3',sans-serif;
+  outline:none;transition:0.3s;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:#607060;}
+.form-group select option{background:#091509;color:var(--white);}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{border-color:var(--lime);background:rgba(124,181,24,0.07);}
+.form-group textarea{min-height:120px;resize:vertical;}
+.form-submit{
+  background:linear-gradient(135deg,var(--lime),var(--lime-dark));
+  color:var(--midnight);border:none;
+  padding:14px 28px;border-radius:5px;
+  font-weight:700;font-size:13px;letter-spacing:1px;
+  text-transform:uppercase;cursor:pointer;transition:0.3s;
+  font-family:'IBM Plex Mono',monospace;
+}
+.form-submit:hover{filter:brightness(1.15);transform:translateY(-2px);}
+
+@media(max-width:900px){
+  .contact-section{padding:90px 6%;}
+  .contact-container{grid-template-columns:1fr;gap:50px;}
+}
+@media(max-width:600px){
+  .contact-section{padding:80px 6%;}
+  .contact-left .section-title{font-size:26px;}
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.footer{
+  background:rgba(2,8,2,0.98);
+  padding:70px 8% 30px;
+  border-top:1px solid rgba(124,181,24,0.12);
+}
+.footer-grid{
+  max-width:1100px;margin:0 auto 50px;
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  gap:60px;
+}
+.footer-brand .logo{font-size:20px;}
+.footer-brand p{color:#607060;font-size:14px;line-height:1.8;margin-top:16px;max-width:300px;}
+.footer-col h4{
+  font-family:'IBM Plex Mono',monospace;
+  color:var(--lime);font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;margin-bottom:18px;
+}
+.footer-col a{
+  display:block;color:#607060;text-decoration:none;
+  font-size:14px;margin-bottom:10px;transition:color 0.3s;
+}
+.footer-col a:hover{color:var(--lime);}
+.footer-bottom{
+  max-width:1100px;margin:0 auto;
+  padding-top:28px;
+  border-top:1px solid rgba(124,181,24,0.08);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.footer-bottom p{color:#405040;font-size:13px;}
+.footer-bottom span{color:var(--lime);}
+
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px;}
+  .footer-brand{grid-column:1/-1;}
+}
+@media(max-width:600px){
+  .footer{padding:50px 6% 24px;}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;gap:6px;}
+}
+
+/* ============================================================
+   STATS BAR
+============================================================ */
+.stats-bar{
+  background:rgba(124,181,24,0.06);
+  border-top:1px solid rgba(124,181,24,0.14);
+  border-bottom:1px solid rgba(124,181,24,0.14);
+  padding:40px 8%;
+}
+.stats-inner{
+  max-width:1100px;margin:auto;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:20px;text-align:center;
+}
+.stat-item .stat-number{
+  font-family:'Rajdhani',sans-serif;
+  font-size:40px;font-weight:700;color:var(--lime);
+  letter-spacing:1px;display:block;
+}
+.stat-item .stat-text{color:#8AAB8A;font-size:13px;letter-spacing:1px;font-family:'IBM Plex Mono',monospace;}
+@media(max-width:700px){.stats-inner{grid-template-columns:repeat(2,1fr);}}
+
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar">
+  <div class="nav-container">
+    <span class="logo">IEOM<span> Group</span></span>
+    <div id="navMenu">
+      <a href="#about">About</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#platform">Platform</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero-section" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-container">
+
+    <div class="hero-left">
+      <div class="hero-badge">TRL 7 · UK Industrial Innovation</div>
+      <h1>Industrial Energy<br><span>Optimization</span><br>Marketplace</h1>
+      <div class="hero-divider"></div>
+      <p class="hero-text">
+        The UK's first Adversarial Efficiency MOT. We convert detected industrial energy anomalies into structured, fraud-proof Performance-Based Deals — enabling zero-capex upgrades for mid-sized factories through verified savings.
+      </p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-lime">Request a Demo →</a>
+        <a href="#how-it-works" class="btn-outline-lime">How It Works</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-img-wrap">
+        <img src="ie.png" alt="Industrial energy facility" loading="lazy">
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-title">▸ Platform Validated Metrics</div>
+        <div class="hero-stat">
+          <div class="stat-dot"></div>
+          <span class="stat-label">Failure Detection Accuracy</span>
+          <span class="stat-val">92%</span>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-dot"></div>
+          <span class="stat-label">Adversarial Tamper Rejection</span>
+          <span class="stat-val">95%</span>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-dot"></div>
+          <span class="stat-label">Diagnostic Window</span>
+          <span class="stat-val">&lt;15 min</span>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-dot orange"></div>
+          <span class="stat-label">Addressable UK Market</span>
+          <span class="stat-val">£5B+</span>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-dot orange"></div>
+          <span class="stat-label">Assets Tested (TRL 7)</span>
+          <span class="stat-val">100+</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== STATS BAR ===================== -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-number">92%</span>
+      <span class="stat-text">Detection Accuracy</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">£5B+</span>
+      <span class="stat-text">Market Potential</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">15 min</span>
+      <span class="stat-text">Diagnostic Window</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">TRL 7</span>
+      <span class="stat-text">Development Level</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="about-section" id="about">
+  <div class="about-container">
+
+    <div class="about-left">
+      <div class="section-label">About IEOM Group</div>
+      <h2 class="section-title">Closing the Execution<br>Gap in Decarbonization</h2>
+      <div class="section-divider"></div>
+      <p>
+        The Industrial Energy-Optimization Marketplace (IEOM) is a data-driven, two-sided platform that converts detected industrial efficiency anomalies into structured, executable Performance-Based Deals. We address the "execution gap" in industrial decarbonization by embedding Energy Performance Contracting (EPC) logic and automated Measurement &amp; Verification directly into software workflows.
+      </p>
+      <p>
+        We target the "missing middle" mid-sized factories in pharmaceutical, food &amp; beverage, and manufacturing sectors enabling them to deploy energy-saving measures with zero upfront capital by paying providers through verified savings.
+      </p>
+      <p>
+        Unlike traditional Energy Management Systems that only provide dashboards, IEOM functions as a <strong style="color:rgba(124,181,24,0.9)">"Transaction Engine"</strong> processing high-frequency energy data to trigger automated project listings, backed by PRAM Act 2025 compliance.
+      </p>
+      <div class="about-features">
+        <div class="feature-tag">EPC-as-Code Engine</div>
+        <div class="feature-tag">Adversarial MOT</div>
+        <div class="feature-tag">Asset Biometrics</div>
+        <div class="feature-tag">PRAM Act 2025 Ready</div>
+        <div class="feature-tag">Zero Capex Deals</div>
+        <div class="feature-tag">Actuarial-Grade Output</div>
+      </div>
+    </div>
+
+    <div class="founder-box">
+      <div class="founder-box-title">Founder &amp; CEO</div>
+      <div class="founder-box-div"></div>
+      <p><strong>Dhruv Bhatt</strong> brings over 7 years of specialized industrial experience in electrical engineering, renewable energy systems, and high-power utility maintenance.</p>
+      <p>Holding an <strong>MSc in Electrical Engineering and Renewable Energy Systems</strong> from Staffordshire University (2024), his expertise in smart power grids and advanced digital signal processing is the primary driver behind the platform's "Technical Truth Layer."</p>
+      <p>Dhruv personally manages development using <strong>MATLAB-Simulink, AutoCAD Electrical, and Multisim</strong> architecting proprietary simulation models for failure and waste prediction.</p>
+      <a href="https://www.linkedin.com/in/" class="linkedin-btn">LinkedIn Profile ↗</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section class="process-section" id="how-it-works">
+  <div class="process-container">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">From Anomaly to Verified Deal<br>in Under 15 Minutes</h2>
+    <div class="section-divider"></div>
+    <p class="process-sub">
+      IEOM replaces slow, expensive manual audits with a four-stage automated pipeline converting raw energy data into financeable, fraud-proof performance contracts.
+    </p>
+
+    <div class="process-grid">
+
+      <div class="process-card">
+        <img class="process-card-img" src="ie1.png" alt="Diagnostics" loading="lazy">
+        <div class="step-badge">STEP 01</div>
+        <h3>High-Frequency Diagnostics</h3>
+        <p>Our 100 kHz pulse-response engine performs non-invasive electrical fingerprinting of your industrial assets — chillers, compressors, VFDs generating a unique biometric ID for each machine in under 15 minutes.</p>
+      </div>
+
+      <div class="process-card">
+        <img class="process-card-img" src="ie2.pnng" alt="Analysis" loading="lazy">
+        <div class="step-badge">STEP 02</div>
+        <h3>Adversarial Trust Engine</h3>
+        <p>The platform detects baseline manipulation, BMS resets, meter tampering, and savings fraud generating a machine-verified "Confidence Score" that banks and insurers can rely on with actuarial certainty.</p>
+      </div>
+
+      <div class="process-card">
+        <img class="process-card-img" src="ie3.png" alt="Marketplace" loading="lazy">
+        <div class="step-badge">STEP 03</div>
+        <h3>Automated Deal Origination</h3>
+        <p>Detected efficiency anomalies are automatically converted into machine-generated "deal objects" structured EPC-as-Code contracts that providers can bid on within our controlled ecosystem.</p>
+      </div>
+
+      <div class="process-card">
+        <img class="process-card-img" src="ie4.png" alt="Verification" loading="lazy">
+        <div class="step-badge">STEP 04</div>
+        <h3>Verified Savings &amp; Compliance</h3>
+        <p>Automated Measurement &amp; Verification tracks delivered savings in real time. Digital Energy Passports are issued, fully aligned with SECR, ESOS, and the PRAM Act 2025 regulatory framework.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PLATFORM ===================== -->
+<section class="platform-section" id="platform">
+  <div class="platform-container">
+    <div class="platform-header">
+      <div class="section-label">Core Technology</div>
+      <h2 class="section-title">Six Pillars of the<br>IEOM Platform</h2>
+      <div class="section-divider"></div>
+      <p>A comprehensive industrial intelligence stack — from raw data ingestion to machine-readable compliance certificates. Each component is purpose-built for the high-stress environments of UK manufacturing.</p>
+    </div>
+
+    <div class="platform-grid">
+
+      <div class="platform-card">
+        <img class="platform-card-img" src="ie5.png" alt="Biometric fingerprinting" loading="lazy">
+        <div class="platform-letter">A</div>
+        <h3>Electrical Biometric Fingerprinting</h3>
+        <p>Creates an indelible electrical ID for every critical asset using 100 kHz pulse-response analysis. Prevents identity fraud even if physical nameplates or digital logs are tampered with.</p>
+        <button class="platform-btn" onclick="toggleCard('cardA',this)">Learn More</button>
+        <div class="platform-expand" id="cardA">Lifetime tracking persists across asset moves, resales, and remanufacturing cycles. The biometric ID is generated from the machine's intrinsic electrical characteristics impossible to clone or spoof.</div>
+      </div>
+
+      <div class="platform-card">
+        <img class="platform-card-img" src="ie6.png" alt="EPC as code" loading="lazy">
+        <div class="platform-letter">B</div>
+        <h3>EPC-as-Code Transaction Engine</h3>
+        <p>Converts detected inefficiencies into structured deal objects with automated M&amp;V. Baseline freezes, weather adjustment factors (HDD/CDD), and production normalization are fully automated.</p>
+        <button class="platform-btn" onclick="toggleCard('cardB',this)">Learn More</button>
+        <div class="platform-expand" id="cardB">Eliminates the legal overhead that traditionally kills mid-market EPC projects. Contract states are compiled directly into software, enforced by machine-readable logic rather than manual auditor oversight.</div>
+      </div>
+
+      <div class="platform-card">
+        <img class="ie7.png" alt="Adversarial engine" loading="lazy">
+        <div class="platform-letter">C</div>
+        <h3>Adversarial Trust Computation</h3>
+        <p>Detects fraud, baseline manipulation, BMS resets, and metadata "gaming" — the adversarial behaviors that undermine shared-savings contracts and investor confidence.</p>
+        <button class="platform-btn" onclick="toggleCard('cardC',this)">Learn More</button>
+        <div class="platform-expand" id="cardC">95% success rate in rejecting tampered performance claims during TRL 7 adversarial robustness testing. Collaboratively validated with industrial specialists simulating "bad actor" scenarios across pharma and manufacturing environments.</div>
+      </div>
+
+      <div class="platform-card">
+        <img class="platform-card-img" src="ie8.png" alt="Risk maps" loading="lazy">
+        <div class="platform-letter">D</div>
+        <h3>Industrial Failure &amp; Waste Trigger Map</h3>
+        <p>A sector-specific risk model scoring mechanical integrity, thermal stability, and electrical harmonics — calibrated for UK pharmaceutical and heavy manufacturing environments.</p>
+        <button class="platform-btn" onclick="toggleCard('cardD',this)">Learn More</button>
+        <div class="platform-expand" id="cardD">Identifies latent internal shorts, harmonic distortion, and motor-winding degradation primary precursors to catastrophic failure and energy waste. Achieves 85% Optimization Index accuracy in predicting asset-level structural failure.</div>
+      </div>
+
+      <div class="platform-card">
+        <img class="platform-card-img" src="ie9.png" alt="Digital twin" loading="lazy">
+        <div class="platform-letter">E</div>
+        <h3>Factory Digital Twin Ledger</h3>
+        <p>Builds an "Energy-Asset Ledger" that maps site lines to specific meters, creating a finance-ready representation of industrial efficiency easier to underwrite, bundle, and securitize.</p>
+        <button class="platform-btn" onclick="toggleCard('cardE',this)">Learn More</button>
+        <div class="platform-expand" id="cardE">Provides the audit trail for green lenders and insurers to model performance risk accurately. Machine-readable operating envelopes ("Permitted Use Envelopes") define optimal setpoints based on current asset degradation state.</div>
+      </div>
+
+      <div class="platform-card">
+        <img class="platform-card-img" src="ie10.png" alt="Compliance" loading="lazy">
+        <div class="platform-letter">F</div>
+        <h3>PRAM Act 2025 Compliance Hub</h3>
+        <p>A centralized registry providing high-assurance audit trails for "Energy Passports" fully aligned with SECR, ESOS, and the Product Safety and Metrology Act 2025.</p>
+        <button class="platform-btn" onclick="toggleCard('cardF',this)">Learn More</button>
+        <div class="platform-expand" id="cardF">Issues standardized "Negative Certificates" for failing equipment with coded failure modes and decommissioning protocols. Ensures hazardous assets are tracked and replaced rather than recirculated through unregulated second-hand markets.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRICING ===================== -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-container">
+    <div class="section-label">Pricing Tiers</div>
+    <h2 class="section-title">Built for Every Scale<br>of Industrial Operation</h2>
+    <div class="section-divider"></div>
+    <p class="pricing-sub">
+      From single-site diagnostics to national multi-hub deployments. Revenue from success fees, SaaS tiers, and API licensing aligned with the value we deliver.
+    </p>
+
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <div class="price-tag">Starter</div>
+        <h3>Site Diagnostic</h3>
+        <span class="price-amount">£2,500</span>
+        <div class="price-unit">per site assessment</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> 15-minute non-invasive scan</li>
+          <li><span class="check">✓</span> Up to 10 assets fingerprinted</li>
+          <li><span class="check">✓</span> Efficiency Confidence Score report</li>
+          <li><span class="check">✓</span> Basic failure risk map</li>
+          <li><span class="check">✓</span> PRAM Act compliance summary</li>
+        </ul>
+        <a href="#contact" class="price-btn price-btn-outline">Get Started →</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-tag">Professional</div>
+        <h3>Micro-EPC Platform</h3>
+        <span class="price-amount">£1,200/mo</span>
+        <div class="price-unit">+ success fee on verified savings</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> Unlimited asset biometric IDs</li>
+          <li><span class="check">✓</span> EPC-as-Code contract automation</li>
+          <li><span class="check">✓</span> Adversarial Trust Engine access</li>
+          <li><span class="check">✓</span> Real-time M&amp;V dashboard</li>
+          <li><span class="check">✓</span> Digital Energy Passport issuance</li>
+          <li><span class="check">✓</span> Marketplace deal origination</li>
+          <li><span class="check">✓</span> BMS/IoT API integration</li>
+        </ul>
+        <a href="#contact" class="price-btn price-btn-lime">Request Demo →</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tag">Enterprise</div>
+        <h3>National Hub License</h3>
+        <span class="price-amount">Custom</span>
+        <div class="price-unit">multi-site + API licensing</div>
+        <ul class="price-features">
+          <li><span class="check">✓</span> Multi-site cluster deployment</li>
+          <li><span class="check">✓</span> Portable MOT Kiosk hardware</li>
+          <li><span class="check">✓</span> Insurance &amp; lender API feeds</li>
+          <li><span class="check">✓</span> White-label certification portal</li>
+          <li><span class="check">✓</span> Regulatory &amp; OPSS liaison</li>
+          <li><span class="check">✓</span> Dedicated forensic support</li>
+        </ul>
+        <a href="#contact" class="price-btn price-btn-outline">Enquire Now →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="faq-section" id="faq">
+  <div class="faq-container">
+    <div class="faq-header">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Common Questions</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>What is an Adversarial Efficiency MOT and how does it differ from a standard energy audit?</h4>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        A standard energy audit relies on self-reported data and manual inspections — typically taking weeks and costing thousands. Our Adversarial Efficiency MOT uses 100 kHz pulse-response diagnostics to measure the intrinsic electrical characteristics of an asset, independent of any reported data. This means we detect tampered baselines, forged performance logs, and internal failure precursors that standard audits completely miss. The "adversarial" element means we treat every asset as potentially compromised the only approach that provides the high-assurance verification required by insurers and green lenders.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>How does the zero-capex model work for factory operators?</h4>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Under our EPC-as-Code model, factories pay for energy-saving upgrades (VFDs, HVAC tuning, harmonic filters) entirely through the verified savings those upgrades generate. The IEOM platform automates Measurement &amp; Verification independently confirming that savings are real before triggering payment. This eliminates the financial risk for the factory. Baseline freezes, weather normalization factors, and production-aware adjustments are all handled automatically by our contract engine, removing the legal overhead that typically makes these deals uneconomic for mid-market factories.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>What industries and asset types does the platform support?</h4>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        IEOM is purpose-built for mid-sized UK industrial facilities, with specific calibration for pharmaceutical manufacturing, food &amp; beverage processing, and general manufacturing. Supported asset types include industrial chillers, compressors, Variable Frequency Drives (VFDs), Air Handling Units (AHUs), high-pressure boilers, UPS systems, and electrical panel infrastructure. The platform operates effectively in high-vibration, high-load environments the conditions that invalidate many commercial building-focused EMS tools. Minimum site energy spend of £200k/year is recommended for full Micro EPC deployment.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>How does IEOM comply with the PRAM Act 2025?</h4>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        The Product Regulation and Metrology Act 2025 mandates enforceable safety rules for energy assets and requires third-party performance certification infrastructure. IEOM was architecturally designed to be this infrastructure. Our Compliance Hub provides the "Technical Truth Layer" required by the Act generating tamper-evident Energy Passports with immutable audit trails, metrological grade diagnostics aligned with OPSS standards, and the "Negative Certificate" mechanism for non-compliant assets. We are actively engaged with the Office for Product Safety and Standards on upcoming regulatory guidance.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>What is the current development status and what validation has been completed?</h4>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        IEOM is at TRL 7 System Prototype Demonstration in Operational Environment. The prototype has been validated on over 100 degraded industrial utility assets, achieving 92% accuracy in detecting hidden failure modes and baseline resets, 95% adversarial tamper rejection, and sub-15-minute diagnostic throughput. All five core architectural elements are integrated and functional. We are progressing toward TRL 8 with portable MOT Kiosk hardware development underway, API ecosystem integration in progress, and provisional patent filings for the proprietary fingerprinting algorithms and Adversarial Trust Score.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>How does the platform integrate with existing factory infrastructure?</h4>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        The platform is designed as a software overlay that integrates with existing SCADA, BMS, and IoT infrastructure without requiring specialized hardware installation in most cases. Open APIs allow "plug-and-play" deployment across national energy hubs, insurance portals, and smart grid controllers. For full Micro-EPC functionality, our portable diagnostic hub can be deployed onsite. The edge inference architecture allows the system to operate in facilities with limited cloud connectivity, with local processing handling the most compute intensive diagnostics.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="contact-section" id="contact">
+  <div class="contact-container">
+
+    <div class="contact-left">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Request a Pilot or<br>Partnership Discussion</h2>
+      <div class="section-divider"></div>
+      <p>
+        Whether you are a mid-sized manufacturer, pharmaceutical facility, ESCO, green lender, industrial insurer, or technology partner we would like to hear from you. Contact us to arrange a demonstration, discuss pilot opportunities, or explore licensing and partnership options.
+      </p>
+      <div class="contact-info-item">
+        <div class="contact-icon">✉</div>
+        <div class="contact-info-text">
+          <strong>Email</strong>
+          <span>dhruvbhatt864@gmail.com</span>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">☎</div>
+        <div class="contact-info-text">
+          <strong>Phone</strong>
+          <span>+44 7767 493479</span>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">⚑</div>
+        <div class="contact-info-text">
+          <strong>Location</strong>
+          <span>United Kingdom</span>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">◈</div>
+        <div class="contact-info-text">
+          <strong>Target Sectors</strong>
+          <span>Pharma · Food &amp; Bev · Manufacturing · ESCOs · Insurers · Green Finance</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Organisation</label>
+          <input type="text" placeholder="Company or institution name">
+        </div>
+        <div class="form-group">
+          <label>I am a…</label>
+          <select>
+            <option value="">Select your role</option>
+            <option>Factory / Plant Manager</option>
+            <option>Energy Manager / ESCO</option>
+            <option>Green Finance / Lender</option>
+            <option>Industrial Insurer / Underwriter</option>
+            <option>Pharmaceutical / Healthcare Facility</option>
+            <option>Food &amp; Beverage Manufacturer</option>
+            <option>Technology / IoT Partner</option>
+            <option>Regulator / Public Sector</option>
+            <option>Investor / Funder</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell us about your interest in IEOM — demo request, pilot programme, partnership, investment enquiry, or annual energy spend details…"></textarea>
+        </div>
+        <button class="form-submit" type="button" onclick="this.textContent='Enquiry Sent ✓';this.style.background='linear-gradient(135deg,#5A8A0E,#3D6009)';">Send Enquiry →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">IEOM<span> Group</span></span>
+      <p>
+        The UK's first Adversarial Industrial Energy Optimization Marketplace. Converting efficiency anomalies into fraud-proof, zero capex Performance-Based Deals securing the UK's £5B industrial energy future.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#platform">Technology</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact">Request Pilot</a>
+      <a href="#contact">Partnerships</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 <span>IEOM Group</span>. All rights reserved. UK Industrial Energy Innovation.</p>
+    <p>Business Plan <span>Dhruv Bhatt</span>, Founder &amp; CEO</p>
+  </div>
+</footer>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+
+/* NAVBAR TOGGLE */
+const toggle = document.getElementById("menuToggle");
+const menu = document.getElementById("navMenu");
+toggle.addEventListener("click",()=>menu.classList.toggle("active"));
+document.querySelectorAll("#navMenu a").forEach(link=>{
+  link.addEventListener("click",()=>menu.classList.remove("active"));
+});
+
+/* SMOOTH SCROLL */
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+  anchor.addEventListener("click",function(e){
+    e.preventDefault();
+    const target=document.querySelector(this.getAttribute("href"));
+    if(target)target.scrollIntoView({behavior:"smooth"});
+  });
+});
+
+/* FAQ TOGGLE */
+function toggleFaq(el){
+  const item=el.parentElement;
+  const wasOpen=item.classList.contains("open");
+  document.querySelectorAll(".faq-item").forEach(i=>i.classList.remove("open"));
+  if(!wasOpen)item.classList.add("open");
+}
+
+/* PLATFORM CARD TOGGLE */
+function toggleCard(id,btn){
+  const card=document.getElementById(id);
+  const isOpen=card.classList.contains("open");
+  card.classList.toggle("open");
+  btn.textContent=isOpen?"Learn More":"Show Less";
+}
+
+</script>
+</body>
+</html>
